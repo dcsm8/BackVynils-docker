@@ -75,6 +75,14 @@ export class AlbumService {
             return await this.albumRepository.remove(album);
     }
 
+    async testSonar(id: number) {
+        const album = await this.albumRepository.findOne(id);
+        if (!album)
+            throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND)
+        else 
+            return await this.albumRepository.remove(album);
+    }
+
     schema = Joi.object({
         name: Joi.string().required(),  
         cover: Joi.string().required(),  
